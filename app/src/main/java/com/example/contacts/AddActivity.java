@@ -69,6 +69,7 @@ public class AddActivity extends AppCompatActivity {
             * switch (item.getItemId()) {
             * 		case R.id.menuPurchasesListNewRecord:
             * 			// TODO: обработчик нажатия здесь
+            * 		hhhh
             * 			return true;
             *                }
             *

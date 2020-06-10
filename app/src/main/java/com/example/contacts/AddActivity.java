@@ -11,9 +11,13 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
+
 
 public class AddActivity extends AppCompatActivity {
+
+    static String newName;
+    static String newPhoneMail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,9 +86,22 @@ public class AddActivity extends AppCompatActivity {
 
             int id = item.getItemId();
 
+           final EditText numberMailET = findViewById(R.id.number_mail_et);
+
+           final EditText nameET = findViewById(R.id.name_et);
             //noinspection SimplifiableIfStatement
             if (id == R.id.toolbar_button_done) {
-                Toast.makeText(AddActivity.this, "Action clicked", Toast.LENGTH_LONG).show();
+                Toast.makeText(AddActivity.this, nameET.getText()+" "+numberMailET.getText()+" Галочка работает !!!", Toast.LENGTH_LONG).show();
+                String newName = nameET.getText().toString();
+                String newPhoneMail = numberMailET.getText().toString();
+//.setDuration(s)
+                onPause();
+//.show();
+                Intent intent = new Intent(AddActivity.this, MainActivity.class);
+                intent.putExtra(newName,newPhoneMail);
+                startActivity(intent);
+
+
                 return true;
             }
 

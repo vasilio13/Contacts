@@ -25,6 +25,9 @@ public class MainActivity extends AppCompatActivity {
 
     public static String s;
 
+    public static String nName;
+    public static String nPhoneMail;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
 
         newItemEditText = findViewById(R.id.newItemEditText);
-
 
         FloatingActionButton addButton = findViewById(R.id.addButton);
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -55,9 +57,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+
+
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        Intent intent = getIntent();
+        String nName = intent.getStringExtra(AddActivity.newName);
+        String nPhoneMail = intent.getStringExtra(AddActivity.newPhoneMail);
+        // Get the Camera instance as the activity achieves full user focus
+        if (nName!= null) {
+            NameListAdapter.b;
+        }
+    }
 
 
 
@@ -96,11 +111,11 @@ public class MainActivity extends AppCompatActivity {
 
             ItemViewHolder(@NonNull View itemView) {
                 super(itemView);
-                nameText = itemView.findViewById(R.id.nameText);
+              //itemView.findViewById(R.id.nameText);
             }
 
-            void bindData(String name) {
-                nameText.setText(name);
+            void bindData(String nName) {
+                nameText.setText(nName);
             }
         }
     }

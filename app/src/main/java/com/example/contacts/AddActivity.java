@@ -97,9 +97,16 @@ public class AddActivity extends AppCompatActivity {
 //.setDuration(s)
                 onPause();
 //.show();
-                Intent intent = new Intent(AddActivity.this, MainActivity.class);
-                intent.putExtra(newName,newPhoneMail);
-                startActivity(intent);
+             //   Intent intent = new Intent(AddActivity.this, MainActivity.class);
+             //   intent.putExtra(newName,newPhoneMail);
+             //   startActivity(intent);
+                Intent data = new Intent();
+                data.putExtra(newName, newPhoneMail);
+                setResult(RESULT_OK, data);
+                finish();
+
+
+
 
 
                 return true;

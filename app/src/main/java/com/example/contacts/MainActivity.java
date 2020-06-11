@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -20,6 +19,8 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+
+    static final String ACCESS_MESSAGE="ACCESS_MESSAGE";
     private RecyclerView recyclerView;
     private EditText newItemEditText;
 
@@ -45,16 +46,19 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String newName = newItemEditText.getText().toString();
                 s=newName;
-
+/**
               if (!newName.trim().isEmpty() && recyclerView.getAdapter() != null) {
                    NameListAdapter adapter1 = (NameListAdapter) recyclerView.getAdapter();
                    adapter1.addItem(newName);
-            }
+            } */
                 Intent intent = new Intent(MainActivity.this, AddActivity.class);
                 intent.putExtra(s,s);
-               startActivity(intent);
+               startActivityForResult(intent, 1);
 
             }
+
+
+
         });
 
 
@@ -63,15 +67,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        Intent intent = getIntent();
-        String nName = intent.getStringExtra(AddActivity.newName);
-        String nPhoneMail = intent.getStringExtra(AddActivity.newPhoneMail);
-        // Get the Camera instance as the activity achieves full user focus
-        if (nName!= null) {
-            NameListAdapter.b;
-        }
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        String nName = data.getStringExtra(AddActivity.newName);
+        String nPhoneMail = data.getStringExtra(AddActivity.newPhoneMail);
+
+            NameListAdapter adapter1 = (NameListAdapter) recyclerView.getAdapter();
+            adapter1.addItem(nName);
+
     }
 
 

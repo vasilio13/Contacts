@@ -17,6 +17,13 @@
         android:hint="search contacts"
         android:background="@drawable/edittextstyle"
         />
+    <TextView
+        android:id="@+id/testTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="test"
+        android:paddingTop="50dp"
+        />
 
 
     <androidx.recyclerview.widget.RecyclerView

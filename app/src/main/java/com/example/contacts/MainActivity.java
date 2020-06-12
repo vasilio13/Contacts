@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -21,6 +22,10 @@ public class MainActivity extends AppCompatActivity {
 
 
     static final String ACCESS_MESSAGE="ACCESS_MESSAGE";
+    static final String NEW_NAME_KEY = "NAME";
+    static final String NEW_PHONE_MAIL_KEY ="PHONE_MAIL";
+    private static  final int REQUEST_ACCESS_TYPE=1;
+
     private RecyclerView recyclerView;
     private EditText newItemEditText;
 
@@ -52,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
                    adapter1.addItem(newName);
             } */
                 Intent intent = new Intent(MainActivity.this, AddActivity.class);
-                intent.putExtra(s,s);
+                intent.putExtra(NEW_NAME_KEY, nName);
                startActivityForResult(intent, 1);
 
             }
@@ -70,15 +75,17 @@ public class MainActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        String nName = data.getStringExtra(AddActivity.newName);
-        String nPhoneMail = data.getStringExtra(AddActivity.newPhoneMail);
+        String nName = data.getStringExtra(NEW_NAME_KEY);
+        String nPhoneMail = data.getStringExtra(NEW_PHONE_MAIL_KEY);
 
-            NameListAdapter adapter1 = (NameListAdapter) recyclerView.getAdapter();
-            adapter1.addItem(nName);
-
+        if (!nName.trim().isEmpty() && recyclerView.getAdapter() != null) {
+        NameListAdapter adapter1 = (NameListAdapter) recyclerView.getAdapter();
+        adapter1.addItem(nName);
     }
-
-
+        TextView testTextView=findViewById(R.id.testTextView); // тест
+       testTextView.setText(nName);//test
+        Toast.makeText(MainActivity.this, nName+" "+nPhoneMail, Toast.LENGTH_LONG).show(); // test
+    }
 
     static class NameListAdapter extends RecyclerView.Adapter<NameListAdapter.ItemViewHolder> {
 

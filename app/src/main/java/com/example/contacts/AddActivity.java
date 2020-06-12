@@ -94,14 +94,15 @@ public class AddActivity extends AppCompatActivity {
                 Toast.makeText(AddActivity.this, nameET.getText()+" "+numberMailET.getText()+" Галочка работает !!!", Toast.LENGTH_LONG).show();
                 String newName = nameET.getText().toString();
                 String newPhoneMail = numberMailET.getText().toString();
-//.setDuration(s)
+
                 onPause();
-//.show();
+
              //   Intent intent = new Intent(AddActivity.this, MainActivity.class);
              //   intent.putExtra(newName,newPhoneMail);
              //   startActivity(intent);
                 Intent data = new Intent();
-                data.putExtra(newName, newPhoneMail);
+                data.putExtra(MainActivity.NEW_NAME_KEY,newName);
+                data.putExtra(MainActivity.NEW_PHONE_MAIL_KEY,newPhoneMail);
                 setResult(RESULT_OK, data);
                 finish();
 

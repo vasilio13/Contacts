@@ -82,9 +82,9 @@ public class MainActivity extends AppCompatActivity {
         NameListAdapter adapter1 = (NameListAdapter) recyclerView.getAdapter();
         adapter1.addItem(nName);
     }
-        TextView testTextView=findViewById(R.id.testTextView); // тест
-       testTextView.setText(nName);//test
-        Toast.makeText(MainActivity.this, nName+" "+nPhoneMail, Toast.LENGTH_LONG).show(); // test
+      //  TextView testTextView=findViewById(R.id.testTextView); // тест
+       //testTextView.setText(nName);//test
+       // Toast.makeText(MainActivity.this, nName+" "+nPhoneMail, Toast.LENGTH_LONG).show(); // test
     }
 
     static class NameListAdapter extends RecyclerView.Adapter<NameListAdapter.ItemViewHolder> {
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
 
         void addItem(String name) {
             items.add(name);
-//            notifyItemChanged(items.indexOf(name)); // for item
+            notifyItemChanged(items.indexOf(name)); // for item
             notifyDataSetChanged(); // for all items
         }
 
@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
 
             ItemViewHolder(@NonNull View itemView) {
                 super(itemView);
-              //itemView.findViewById(R.id.nameText);
+              itemView.findViewById(R.id.nameText);
             }
 
             void bindData(String nName) {

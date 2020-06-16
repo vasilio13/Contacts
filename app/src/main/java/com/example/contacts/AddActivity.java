@@ -16,6 +16,9 @@ import androidx.appcompat.widget.Toolbar;
 
 public class AddActivity extends AppCompatActivity {
 
+    enum TypeContact {phone,mail}
+    public TypeContact typeContact;
+
     static String newName;
     static String newPhoneMail;
 
@@ -49,9 +52,11 @@ public class AddActivity extends AppCompatActivity {
                         break;
                     case R.id.radioButtonPhone:
                         numberMailET.setHint("+375 29 xx - xx - xx");
+                        typeContact= TypeContact.phone;
                         break;
                     case R.id.radioButtonMail:
                         numberMailET.setHint("name@hosting.zone");
+                        typeContact= TypeContact.mail;
                         break;
                 }
             }
@@ -66,23 +71,6 @@ public class AddActivity extends AppCompatActivity {
 
        @Override
         public boolean onOptionsItemSelected(MenuItem item) {
-            // Handle action bar item clicks here. The action bar will
-            // automatically handle clicks on the Home/Up button, so long
-            // as you specify a parent activity in AndroidManifest.xml.
-           /**
-            * switch (item.getItemId()) {
-            * 		case R.id.menuPurchasesListNewRecord:
-            * 			// TODO: обработчик нажатия здесь
-            * 		hhhh
-            * 			return true;
-            *                }
-            *
-            * 		return super.onOptionsItemSelected(item);
-
-            *
-            */
-
-
 
             int id = item.getItemId();
 
@@ -97,18 +85,13 @@ public class AddActivity extends AppCompatActivity {
 
                 onPause();
 
-             //   Intent intent = new Intent(AddActivity.this, MainActivity.class);
-             //   intent.putExtra(newName,newPhoneMail);
-             //   startActivity(intent);
                 Intent data = new Intent();
                 data.putExtra(MainActivity.NEW_NAME_KEY,newName);
                 data.putExtra(MainActivity.NEW_PHONE_MAIL_KEY,newPhoneMail);
+                if (typeContact == TypeContact.phone) {data.putExtra(MainActivity.NEW_TYPE_CONTACT_KEY,"phone");}
+                else if (typeContact == TypeContact.mail) {data.putExtra(MainActivity.NEW_TYPE_CONTACT_KEY,"mail");}
                 setResult(RESULT_OK, data);
                 finish();
-
-
-
-
 
                 return true;
             }

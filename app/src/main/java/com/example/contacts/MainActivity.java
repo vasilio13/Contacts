@@ -20,10 +20,11 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-
     static final String ACCESS_MESSAGE="ACCESS_MESSAGE";
     static final String NEW_NAME_KEY = "NAME";
     static final String NEW_PHONE_MAIL_KEY ="PHONE_MAIL";
+    static final String NEW_TYPE_CONTACT_KEY = "TYPE_CONTACT";
+
     private static  final int REQUEST_ACCESS_TYPE=1;
 
     private RecyclerView recyclerView;
@@ -77,26 +78,38 @@ public class MainActivity extends AppCompatActivity {
 
         String nName = data.getStringExtra(NEW_NAME_KEY);
         String nPhoneMail = data.getStringExtra(NEW_PHONE_MAIL_KEY);
+        String typeContact = data.getStringExtra(NEW_TYPE_CONTACT_KEY);
+
+        NameListAdapter.Item item = null;
+        item.name=nName;
+        item.phoneMail=nPhoneMail;
+        item.typeContact=typeContact;
 
         if (!nName.trim().isEmpty() && recyclerView.getAdapter() != null) {
         NameListAdapter adapter1 = (NameListAdapter) recyclerView.getAdapter();
-        adapter1.addItem(nName);
+        adapter1.addItem(item);
     }
       //  TextView testTextView=findViewById(R.id.testTextView); // тест
        //testTextView.setText(nName);//test
-       // Toast.makeText(MainActivity.this, nName+" "+nPhoneMail, Toast.LENGTH_LONG).show(); // test
+        Toast.makeText(MainActivity.this, nName+" "+typeContact+" "+nPhoneMail, Toast.LENGTH_LONG).show(); // test
     }
 
     static class NameListAdapter extends RecyclerView.Adapter<NameListAdapter.ItemViewHolder> {
+class Item {
+String name;
+String phoneMail;
+String typeContact;
+}
 
-        private ArrayList<String> items = new ArrayList<>();
+Item item = new Item();
+        private ArrayList<Item> items = new ArrayList<>();
 
         NameListAdapter() {
         }
 
-        void addItem(String name) {
-            items.add(name);
-            notifyItemChanged(items.indexOf(name)); // for item
+        void addItem(Item item) {
+            items.add(item);
+            notifyItemChanged(items.indexOf(item)); // for item
             notifyDataSetChanged(); // for all items
         }
 
@@ -119,14 +132,17 @@ public class MainActivity extends AppCompatActivity {
 
         static class ItemViewHolder extends RecyclerView.ViewHolder {
             private TextView nameText;
+            private TextView numberMailText;
 
             ItemViewHolder(@NonNull View itemView) {
                 super(itemView);
-              itemView.findViewById(R.id.nameText);
+                nameText = itemView.findViewById(R.id.nameText);
+                numberMailText = itemView.findViewById(R.id.nameText);
             }
 
-            void bindData(String nName) {
+            void bindData(String nName, String nPhoneMail) {
                 nameText.setText(nName);
+                numberMailText.setText(nPhoneMail);
             }
         }
     }

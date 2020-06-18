@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -34,6 +35,12 @@ public class MainActivity extends AppCompatActivity {
 
     public static String nName;
     public static String nPhoneMail;
+
+    class Items {
+        String name;
+        String phoneMail;
+        String typeContact;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +87,9 @@ public class MainActivity extends AppCompatActivity {
         String nPhoneMail = data.getStringExtra(NEW_PHONE_MAIL_KEY);
         String typeContact = data.getStringExtra(NEW_TYPE_CONTACT_KEY);
 
-        NameListAdapter.Item item = null;
+
+
+        Items item = new Items();
         item.name=nName;
         item.phoneMail=nPhoneMail;
         item.typeContact=typeContact;
@@ -95,19 +104,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     static class NameListAdapter extends RecyclerView.Adapter<NameListAdapter.ItemViewHolder> {
-class Item {
-String name;
-String phoneMail;
-String typeContact;
-}
 
-Item item = new Item();
-        private ArrayList<Item> items = new ArrayList<>();
+        private ArrayList<Items> items = new ArrayList<>();
 
         NameListAdapter() {
         }
 
-        void addItem(Item item) {
+        void addItem(Items item) {
             items.add(item);
             notifyItemChanged(items.indexOf(item)); // for item
             notifyDataSetChanged(); // for all items
@@ -122,7 +125,7 @@ Item item = new Item();
 
         @Override
         public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
-            holder.bindData(items.get(position));
+            holder.bindData(items.get(position).name, items.get(position).phoneMail);
         }
 
         @Override
@@ -137,7 +140,7 @@ Item item = new Item();
             ItemViewHolder(@NonNull View itemView) {
                 super(itemView);
                 nameText = itemView.findViewById(R.id.nameText);
-                numberMailText = itemView.findViewById(R.id.nameText);
+                numberMailText = itemView.findViewById(R.id.number_mail_et);
             }
 
             void bindData(String nName, String nPhoneMail) {

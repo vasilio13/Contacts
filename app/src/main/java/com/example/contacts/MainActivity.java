@@ -5,13 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageSwitcher;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -100,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
     }
       //  TextView testTextView=findViewById(R.id.testTextView); // тест
        //testTextView.setText(nName);//test
-        Toast.makeText(MainActivity.this, nName+" "+typeContact+" "+nPhoneMail, Toast.LENGTH_LONG).show(); // test
+       // Toast.makeText(MainActivity.this, nName+" "+typeContact+" "+nPhoneMail, Toast.LENGTH_LONG).show(); // test
     }
 
     static class NameListAdapter extends RecyclerView.Adapter<NameListAdapter.ItemViewHolder> {
@@ -124,8 +125,21 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
-            holder.bindData(items.get(position).name, items.get(position).phoneMail);
+        public void onBindViewHolder(@NonNull ItemViewHolder holder, int position)
+
+        {
+            holder.bindData(items.get(position).name, items.get(position).phoneMail, items.get(position).typeContact);
+
+            holder.itemView.setOnClickListener (new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ImageView iconPM = v.findViewById(R.id.icon_phone_mail);
+                iconPM.setImageResource(R.drawable.ic_search_black_24dp);
+               //   Intent intent = new Intent(MainActivity.this, EditRemoveActivity.class);
+               //   intent.putExtra(NEW_NAME_KEY, nName);
+               //  startActivityForResult(intent, 1);
+                }
+            });
         }
 
         @Override
@@ -136,16 +150,25 @@ public class MainActivity extends AppCompatActivity {
         static class ItemViewHolder extends RecyclerView.ViewHolder {
             private TextView nameText;
             private TextView numberMailText;
+            private ImageView iconPhoneMail;
 
             ItemViewHolder(@NonNull View itemView) {
                 super(itemView);
                 nameText = itemView.findViewById(R.id.nameText);
                 numberMailText = itemView.findViewById(R.id.number_mail_et);
+                iconPhoneMail = itemView.findViewById(R.id.icon_phone_mail);
+
             }
 
-            void bindData(String nName, String nPhoneMail) {
+
+
+            void bindData(String nName, String nPhoneMail, String typeContact) {
+
                 nameText.setText(nName);
                 numberMailText.setText(nPhoneMail);
+                if (typeContact.equals("phone")) {iconPhoneMail.setImageResource(R.drawable.ic_contact_phone_blue_48dp);} //
+                else if (typeContact.equals("mail")) {iconPhoneMail.setImageResource(R.drawable.ic_contact_mail_pink_48dp);}//
+                else  {iconPhoneMail.setImageResource(R.drawable.ic_search_black_24dp);}//
             }
         }
     }

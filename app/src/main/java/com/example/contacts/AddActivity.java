@@ -79,7 +79,7 @@ public class AddActivity extends AppCompatActivity {
            final EditText nameET = findViewById(R.id.name_et);
             //noinspection SimplifiableIfStatement
             if (id == R.id.toolbar_button_done) {
-                Toast.makeText(AddActivity.this, nameET.getText()+" "+numberMailET.getText()+" Галочка работает !!!", Toast.LENGTH_LONG).show();
+               // Toast.makeText(AddActivity.this, nameET.getText()+" "+numberMailET.getText()+" Галочка работает !!!", Toast.LENGTH_LONG).show();
                 String newName = nameET.getText().toString();
                 String newPhoneMail = numberMailET.getText().toString();
 

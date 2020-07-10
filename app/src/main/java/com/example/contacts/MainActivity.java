@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static String nName;
     public static String nPhoneMail;
+    public static String nTypeContact;
 
     class Items {
         String name;
@@ -86,14 +87,14 @@ public class MainActivity extends AppCompatActivity {
 
         String nName = data.getStringExtra(NEW_NAME_KEY);
         String nPhoneMail = data.getStringExtra(NEW_PHONE_MAIL_KEY);
-        String typeContact = data.getStringExtra(NEW_TYPE_CONTACT_KEY);
+        String nTypeContact = data.getStringExtra(NEW_TYPE_CONTACT_KEY);
 
 
 
         Items item = new Items();
         item.name=nName;
         item.phoneMail=nPhoneMail;
-        item.typeContact=typeContact;
+        item.typeContact=nTypeContact;
 
         if (!nName.trim().isEmpty() && recyclerView.getAdapter() != null) {
         NameListAdapter adapter1 = (NameListAdapter) recyclerView.getAdapter();
@@ -104,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
        // Toast.makeText(MainActivity.this, nName+" "+typeContact+" "+nPhoneMail, Toast.LENGTH_LONG).show(); // test
     }
 
-    static class NameListAdapter extends RecyclerView.Adapter<NameListAdapter.ItemViewHolder> {
+    class NameListAdapter extends RecyclerView.Adapter<NameListAdapter.ItemViewHolder> {
 
         private ArrayList<Items> items = new ArrayList<>();
 
@@ -125,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onBindViewHolder(@NonNull ItemViewHolder holder, int position)
+        public void onBindViewHolder(@NonNull ItemViewHolder holder, final int position)
 
         {
             holder.bindData(items.get(position).name, items.get(position).phoneMail, items.get(position).typeContact);
@@ -134,10 +135,29 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     ImageView iconPM = v.findViewById(R.id.icon_phone_mail);
-                iconPM.setImageResource(R.drawable.ic_search_black_24dp);
-               //   Intent intent = new Intent(MainActivity.this, EditRemoveActivity.class);
-               //   intent.putExtra(NEW_NAME_KEY, nName);
-               //  startActivityForResult(intent, 1);
+                iconPM.setImageResource(R.drawable.ic_search_black_24dp); // Тестово меняю иконку для проверки нажатия
+                 /**Intent intent = new Intent(MainActivity.this, EditRemoveActivity.class);
+
+                    intent.putExtra("name", nName);
+                    intent.putExtra("phonemail", nPhoneMail);
+                    intent.putExtra("typeContact", nTypeContact);
+*/
+                    Intent data = new Intent(MainActivity.this, EditRemoveActivity.class);
+                    nName=items.get(position).name;
+                   nPhoneMail=items.get(position).phoneMail;
+                   nTypeContact=items.get(position).typeContact;
+                    data.putExtra("name",nName);
+                    data.putExtra("phonemail",nPhoneMail);
+                    data.putExtra("typeContact", nTypeContact);
+                   /** if (nTypeContact == nTypeContact.phone) {data.putExtra(MainActivity.NEW_TYPE_CONTACT_KEY,"phone");}
+                    else if (typeContact == TypeContact.mail) {data.putExtra(MainActivity.NEW_TYPE_CONTACT_KEY,"mail");}*/
+                  //  setResult(RESULT_OK, data);
+                    Toast.makeText(MainActivity.this, "!!!", Toast.LENGTH_LONG).show();
+                    finish();
+
+
+
+                 startActivity(data);
                 }
             });
         }
@@ -147,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
             return items != null ? items.size() : 0;
         }
 
-        static class ItemViewHolder extends RecyclerView.ViewHolder {
+         class ItemViewHolder extends RecyclerView.ViewHolder {
             private TextView nameText;
             private TextView numberMailText;
             private ImageView iconPhoneMail;

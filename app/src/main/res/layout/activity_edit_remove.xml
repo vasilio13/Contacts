@@ -43,6 +43,7 @@
         android:text="Remove"
         android:background="@color/red"
         android:padding="30dp"
+        android:onClick="onClick"
 />
 
 </LinearLayout>

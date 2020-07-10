@@ -77,7 +77,6 @@ public class AddActivity extends AppCompatActivity {
            final EditText numberMailET = findViewById(R.id.number_mail_et);
 
            final EditText nameET = findViewById(R.id.name_et);
-            //noinspection SimplifiableIfStatement
             if (id == R.id.toolbar_button_done) {
                // Toast.makeText(AddActivity.this, nameET.getText()+" "+numberMailET.getText()+" Галочка работает !!!", Toast.LENGTH_LONG).show();
                 String newName = nameET.getText().toString();

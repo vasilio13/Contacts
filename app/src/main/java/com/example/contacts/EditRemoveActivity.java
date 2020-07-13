@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,38 +28,19 @@ public class EditRemoveActivity extends AppCompatActivity {
             String nTypeContact = data.getString("typeContact");
             Toast.makeText(EditRemoveActivity.this, nName + " " + nTypeContact + " " + nPhoneMail, Toast.LENGTH_LONG).show();
 
+            RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
             EditText nameet = findViewById(R.id.name_et);
             EditText phonemailet = findViewById(R.id.number_mail_et);
+
+            if (nTypeContact.equals("phone")) {radioGroup.check(R.id.radioButtonPhone);} //
+            else if (nTypeContact.equals("mail")) {radioGroup.check(R.id.radioButtonMail);}//
+            else  {}
 
             nameet.setText(nName);
             phonemailet.setText(nPhoneMail);
 
         }
-
-        //setContentView(textView);
-
-
-
-
-
-
-
-/**Intent data = new Intent(EditRemoveActivity.this, MainActivity.class);
-        String nName = data.getStringExtra("name");
-        String nPhoneMail = data.getStringExtra("phonemail");
-        String nTypeContact = data.getStringExtra("typeContact");
-        setContentView(R.layout.activity_edit_remove);
-
-        EditText nameet = findViewById(R.id.name_et);
-        EditText phonemailet = findViewById(R.id.number_mail_et);
-
-        if (nName!=null) {
-            Toast.makeText(EditRemoveActivity.this, nName + " " + nTypeContact + " " + nPhoneMail, Toast.LENGTH_LONG).show();
-            nameet.setText(nName);
-            phonemailet.setText(nPhoneMail);     }
-*/
-
-
+        
         Button removeb = findViewById(R.id.remove_button);
         removeb.setOnClickListener(new View.OnClickListener() {
             @Override

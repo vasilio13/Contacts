@@ -136,12 +136,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     ImageView iconPM = v.findViewById(R.id.icon_phone_mail);
                 iconPM.setImageResource(R.drawable.ic_search_black_24dp); // Тестово меняю иконку для проверки нажатия
-                 /**Intent intent = new Intent(MainActivity.this, EditRemoveActivity.class);
 
-                    intent.putExtra("name", nName);
-                    intent.putExtra("phonemail", nPhoneMail);
-                    intent.putExtra("typeContact", nTypeContact);
-*/
                     Intent data = new Intent(MainActivity.this, EditRemoveActivity.class);
                     nName=items.get(position).name;
                    nPhoneMail=items.get(position).phoneMail;
@@ -152,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
                    /** if (nTypeContact == nTypeContact.phone) {data.putExtra(MainActivity.NEW_TYPE_CONTACT_KEY,"phone");}
                     else if (typeContact == TypeContact.mail) {data.putExtra(MainActivity.NEW_TYPE_CONTACT_KEY,"mail");}*/
                   //  setResult(RESULT_OK, data);
-                    Toast.makeText(MainActivity.this, "!!!", Toast.LENGTH_LONG).show();
+                   // Toast.makeText(MainActivity.this, "!!!", Toast.LENGTH_LONG).show();
                     finish();
 
 

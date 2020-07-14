@@ -89,7 +89,7 @@ public class AddActivity extends AppCompatActivity {
                 data.putExtra(MainActivity.NEW_PHONE_MAIL_KEY,newPhoneMail);
                 if (typeContact == TypeContact.phone) {data.putExtra(MainActivity.NEW_TYPE_CONTACT_KEY,"phone");}
                 else if (typeContact == TypeContact.mail) {data.putExtra(MainActivity.NEW_TYPE_CONTACT_KEY,"mail");}
-                setResult(RESULT_OK, data);
+                setResult(1, data);
                 finish();
 
                 return true;

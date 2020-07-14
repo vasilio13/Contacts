@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
             } */
                 Intent intent = new Intent(MainActivity.this, AddActivity.class);
                 intent.putExtra(NEW_NAME_KEY, nName);
-               startActivityForResult(intent, 1);
+               startActivityForResult(intent, 1010);
 
             }
 
@@ -85,6 +85,8 @@ public class MainActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        if (requestCode == 1010) {
+
         String nName = data.getStringExtra(NEW_NAME_KEY);
         String nPhoneMail = data.getStringExtra(NEW_PHONE_MAIL_KEY);
         String nTypeContact = data.getStringExtra(NEW_TYPE_CONTACT_KEY);
@@ -97,9 +99,13 @@ public class MainActivity extends AppCompatActivity {
         item.typeContact=nTypeContact;
 
         if (!nName.trim().isEmpty() && recyclerView.getAdapter() != null) {
-        NameListAdapter adapter1 = (NameListAdapter) recyclerView.getAdapter();
-        adapter1.addItem(item);
-    }
+            Toast.makeText(MainActivity.this, "requestCode="+requestCode, Toast.LENGTH_LONG).show();
+            NameListAdapter adapter1 = (NameListAdapter) recyclerView.getAdapter();
+            adapter1.addItem(item);
+        }
+                     }
+        else Toast.makeText(MainActivity.this, "resultCode<>1", Toast.LENGTH_LONG).show();
+
       //  TextView testTextView=findViewById(R.id.testTextView); // тест
        //testTextView.setText(nName);//test
        // Toast.makeText(MainActivity.this, nName+" "+typeContact+" "+nPhoneMail, Toast.LENGTH_LONG).show(); // test
@@ -141,9 +147,9 @@ public class MainActivity extends AppCompatActivity {
                     nName=items.get(position).name;
                    nPhoneMail=items.get(position).phoneMail;
                    nTypeContact=items.get(position).typeContact;
-                    data.putExtra("name",nName);
-                    data.putExtra("phonemail",nPhoneMail);
-                    data.putExtra("typeContact", nTypeContact);
+                    data.putExtra(NEW_NAME_KEY,nName);
+                    data.putExtra(NEW_PHONE_MAIL_KEY,nPhoneMail);
+                    data.putExtra(NEW_TYPE_CONTACT_KEY, nTypeContact);
                    /** if (nTypeContact == nTypeContact.phone) {data.putExtra(MainActivity.NEW_TYPE_CONTACT_KEY,"phone");}
                     else if (typeContact == TypeContact.mail) {data.putExtra(MainActivity.NEW_TYPE_CONTACT_KEY,"mail");}*/
                   //  setResult(RESULT_OK, data);
@@ -152,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-                 startActivity(data);
+                 startActivityForResult(data, 2020);
                 }
             });
         }

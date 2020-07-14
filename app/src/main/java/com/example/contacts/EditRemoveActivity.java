@@ -23,9 +23,9 @@ public class EditRemoveActivity extends AppCompatActivity {
         Bundle data = getIntent().getExtras();
 
         if(data!=null){
-            String nName = data.getString("name");
-            String nPhoneMail = data.getString("phonemail");
-            String nTypeContact = data.getString("typeContact");
+            String nName = data.getString(MainActivity.NEW_NAME_KEY);
+            String nPhoneMail = data.getString(MainActivity.NEW_PHONE_MAIL_KEY);
+            String nTypeContact = data.getString(MainActivity.NEW_TYPE_CONTACT_KEY);
             Toast.makeText(EditRemoveActivity.this, nName + " " + nTypeContact + " " + nPhoneMail, Toast.LENGTH_LONG).show();
 
             RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
@@ -40,19 +40,31 @@ public class EditRemoveActivity extends AppCompatActivity {
             phonemailet.setText(nPhoneMail);
 
         }
-        
+
         Button removeb = findViewById(R.id.remove_button);
         removeb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText newName = findViewById(R.id.name_et);
-                EditText newPhoneMail = findViewById(R.id.number_mail_et);
-                Intent data = new Intent();
-                data.putExtra(MainActivity.NEW_NAME_KEY,newName.toString());
-                data.putExtra(MainActivity.NEW_PHONE_MAIL_KEY,newPhoneMail.toString());
+                EditText nameet = findViewById(R.id.name_et);
+                EditText numbermailet = findViewById(R.id.number_mail_et);
+                RadioGroup radioGroup = findViewById(R.id.radioGroup);
+                int code = radioGroup.getCheckedRadioButtonId();
+                String nName = nameet.toString();
+                String nPhoneMail = numbermailet.toString();
+                String nTypeContact="mail";
+                if (code == (R.id.radioButtonPhone)) {nTypeContact="phone";}
+                else {nTypeContact="mail";}
+
+                Intent data = new Intent(EditRemoveActivity.this, MainActivity.class);
+                data.putExtra(MainActivity.NEW_NAME_KEY,nName);
+                data.putExtra(MainActivity.NEW_PHONE_MAIL_KEY,nPhoneMail);
+                data.putExtra(MainActivity.NEW_TYPE_CONTACT_KEY, nTypeContact);
                 // if (typeContact == AddActivity.TypeContact.phone) {data.putExtra(MainActivity.NEW_TYPE_CONTACT_KEY,"phone");}
                 // else if (typeContact == AddActivity.TypeContact.mail) {data.putExtra(MainActivity.NEW_TYPE_CONTACT_KEY,"mail");}
-                setResult(RESULT_OK, data);
+                //setResult(RESULT_OK, data);
+
+
+                setResult(2,data);
                 finish();
             }
         });

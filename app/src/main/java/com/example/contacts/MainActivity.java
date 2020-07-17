@@ -63,11 +63,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String newName = newItemEditText.getText().toString();
                 s = newName;
-/**
- if (!newName.trim().isEmpty() && recyclerView.getAdapter() != null) {
- NameListAdapter adapter1 = (NameListAdapter) recyclerView.getAdapter();
- adapter1.addItem(newName);
- } */
+
                 Intent intent = new Intent(MainActivity.this, AddActivity.class);
                 intent.putExtra(NEW_NAME_KEY, nName);
                 startActivityForResult(intent, 1010);
@@ -115,8 +111,9 @@ public class MainActivity extends AppCompatActivity {
 
             if (!nName.trim().isEmpty() && recyclerView.getAdapter() != null) {
                 Toast.makeText(MainActivity.this, "requestCode=" + requestCode, Toast.LENGTH_LONG).show();
-                NameListAdapter adapter1 = (NameListAdapter) recyclerView.getAdapter();
-                adapter1.notifyItemChanged(adapter1.getItemCount(), item);
+
+                NameListAdapter changeAdapter = (NameListAdapter) recyclerView.getAdapter();
+                changeAdapter.changeItem(item);
             }
 
         }
@@ -135,6 +132,12 @@ public class MainActivity extends AppCompatActivity {
 
         void addItem(Items item) {
             items.add(item);
+            notifyItemChanged(items.indexOf(item)); // for item
+            notifyDataSetChanged(); // for all items
+        }
+
+        void changeItem(Items item) {
+            items.remove(items.indexOf(item));
             notifyItemChanged(items.indexOf(item)); // for item
             notifyDataSetChanged(); // for all items
         }

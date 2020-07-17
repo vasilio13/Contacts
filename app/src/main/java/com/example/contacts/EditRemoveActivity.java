@@ -64,8 +64,9 @@ public class EditRemoveActivity extends AppCompatActivity {
                 //setResult(RESULT_OK, data);
 
 
-                setResult(2,data);
+                setResult(2020,data);
                 finish();
+
             }
         });
 

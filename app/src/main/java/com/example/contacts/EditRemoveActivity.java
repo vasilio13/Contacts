@@ -50,8 +50,8 @@ int position;
                 EditText numbermailet = findViewById(R.id.number_mail_et);
                 RadioGroup radioGroup = findViewById(R.id.radioGroup);
                 int code = radioGroup.getCheckedRadioButtonId();
-                String nName = nameet.toString();
-                String nPhoneMail = numbermailet.toString();
+                String nName = nameet.getText().toString();
+                String nPhoneMail = numbermailet.getText().toString();
                 String nTypeContact="mail";
                 if (code == (R.id.radioButtonPhone)) {nTypeContact="phone";}
                 else {nTypeContact="mail";}

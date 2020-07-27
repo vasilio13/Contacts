@@ -155,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
 
         void changeItem(Items item) {
             items.set(position,item);
-            notifyItemChanged(items.indexOf(item)); // for item
+          notifyItemChanged(position); // for item
             notifyDataSetChanged(); // for all items
         }
 

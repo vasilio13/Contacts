@@ -48,13 +48,13 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public boolean equals(@Nullable Items item) {
-            return
-                    ((name.equals(item.name)) &&
-                            (phoneMail.equals(item.phoneMail)) &&
-                            (typeContact.equals(item.typeContact)));
-
-
-
+            if ( item instanceof Items) {
+                return
+                        ((name.equals(item.name)) &&
+                                (phoneMail.equals(item.phoneMail)) &&
+                                (typeContact.equals(item.typeContact)));
+            }
+            else return false;
         }
     }
 

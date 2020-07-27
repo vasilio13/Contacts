@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class EditRemoveActivity extends AppCompatActivity {
-
+int position;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +26,7 @@ public class EditRemoveActivity extends AppCompatActivity {
             String nName = data.getString(MainActivity.NEW_NAME_KEY);
             String nPhoneMail = data.getString(MainActivity.NEW_PHONE_MAIL_KEY);
             String nTypeContact = data.getString(MainActivity.NEW_TYPE_CONTACT_KEY);
+            position = data.getInt(MainActivity.POSITION);
             Toast.makeText(EditRemoveActivity.this, nName + " " + nTypeContact + " " + nPhoneMail, Toast.LENGTH_LONG).show();
 
             RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
@@ -59,6 +60,7 @@ public class EditRemoveActivity extends AppCompatActivity {
                 data.putExtra(MainActivity.NEW_NAME_KEY,nName);
                 data.putExtra(MainActivity.NEW_PHONE_MAIL_KEY,nPhoneMail);
                 data.putExtra(MainActivity.NEW_TYPE_CONTACT_KEY, nTypeContact);
+                data.putExtra(MainActivity.POSITION, position);
                 // if (typeContact == AddActivity.TypeContact.phone) {data.putExtra(MainActivity.NEW_TYPE_CONTACT_KEY,"phone");}
                 // else if (typeContact == AddActivity.TypeContact.mail) {data.putExtra(MainActivity.NEW_TYPE_CONTACT_KEY,"mail");}
                 //setResult(RESULT_OK, data);

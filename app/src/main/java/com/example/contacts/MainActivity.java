@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
     static final String NEW_TYPE_CONTACT_KEY = "TYPE_CONTACT";
     static final String POSITION = "POSITION";
 
+    int position;
+
     private static final int REQUEST_ACCESS_TYPE = 1;
 
     private RecyclerView recyclerView;
@@ -114,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
             String nName = data.getStringExtra(NEW_NAME_KEY);
             String nPhoneMail = data.getStringExtra(NEW_PHONE_MAIL_KEY);
             String nTypeContact = data.getStringExtra(NEW_TYPE_CONTACT_KEY);
+            position = data.getIntExtra(POSITION,1);
 
             Toast.makeText(MainActivity.this, "requestCode=" + requestCode + " " + nName + " " + nPhoneMail + " " + nTypeContact, Toast.LENGTH_LONG).show();
 
@@ -123,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
             item.typeContact = nTypeContact;
 
             if (!nName.trim().isEmpty() && recyclerView.getAdapter() != null) {
-                Toast.makeText(MainActivity.this, "requestCode=" + requestCode, Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, "!requestCode=" + requestCode, Toast.LENGTH_LONG).show();
 
                 NameListAdapter changeAdapter = (NameListAdapter) recyclerView.getAdapter();
                 changeAdapter.changeItem(item);
@@ -151,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         void changeItem(Items item) {
-            items.remove(items.indexOf(item));
+            items.set(position,item);
             notifyItemChanged(items.indexOf(item)); // for item
             notifyDataSetChanged(); // for all items
         }

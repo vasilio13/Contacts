@@ -1,6 +1,7 @@
 package com.example.contacts;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -44,6 +45,17 @@ public class MainActivity extends AppCompatActivity {
         String name;
         String phoneMail;
         String typeContact;
+
+        @Override
+        public boolean equals(@Nullable Items item) {
+            return
+                    ((name.equals(item.name)) &&
+                            (phoneMail.equals(item.phoneMail)) &&
+                            (typeContact.equals(item.typeContact)));
+
+
+
+        }
     }
 
     @Override
@@ -129,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
 
         NameListAdapter() {
         }
+
 
         void addItem(Items item) {
             items.add(item);

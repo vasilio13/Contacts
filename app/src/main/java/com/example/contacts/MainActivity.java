@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -47,12 +48,12 @@ public class MainActivity extends AppCompatActivity {
         String typeContact;
 
         @Override
-        public boolean equals(@Nullable Items item) {
+        public boolean equals(@Nullable Object item) {
             if ( item instanceof Items) {
                 return
-                        ((name.equals(item.name)) &&
-                                (phoneMail.equals(item.phoneMail)) &&
-                                (typeContact.equals(item.typeContact)));
+                        ((name.equals(((Items) item).name)) &&
+                                (phoneMail.equals(((Items) item).phoneMail)) &&
+                                (typeContact.equals(((Items) item).typeContact)));
             }
             else return false;
         }

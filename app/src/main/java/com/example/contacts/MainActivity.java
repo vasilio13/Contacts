@@ -5,11 +5,14 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.SearchView;
 
 import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -70,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
 
-        newItemEditText = findViewById(R.id.newItemEditText);
+       // newItemEditText = findViewById(R.id.newItemEditText);
 
         FloatingActionButton addButton = findViewById(R.id.addButton);
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -87,8 +90,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         });
-
-
     }
 
     @Override
@@ -100,7 +101,6 @@ public class MainActivity extends AppCompatActivity {
             String nName = data.getStringExtra(NEW_NAME_KEY);
             String nPhoneMail = data.getStringExtra(NEW_PHONE_MAIL_KEY);
             String nTypeContact = data.getStringExtra(NEW_TYPE_CONTACT_KEY);
-
 
             Items item = new Items();
             item.name = nName;
@@ -134,9 +134,6 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-        //  TextView testTextView=findViewById(R.id.testTextView); // тест
-        //testTextView.setText(nName);//test
-        // Toast.makeText(MainActivity.this, nName+" "+typeContact+" "+nPhoneMail, Toast.LENGTH_LONG).show(); // test
     }
 
     class NameListAdapter extends RecyclerView.Adapter<NameListAdapter.ItemViewHolder> {
@@ -184,12 +181,6 @@ public class MainActivity extends AppCompatActivity {
                     data.putExtra(NEW_NAME_KEY, nName);
                     data.putExtra(NEW_PHONE_MAIL_KEY, nPhoneMail);
                     data.putExtra(NEW_TYPE_CONTACT_KEY, nTypeContact);
-                    /** if (nTypeContact == nTypeContact.phone) {data.putExtra(MainActivity.NEW_TYPE_CONTACT_KEY,"phone");}
-                     else if (typeContact == TypeContact.mail) {data.putExtra(MainActivity.NEW_TYPE_CONTACT_KEY,"mail");}*/
-                    //  setResult(RESULT_OK, data);
-                    // Toast.makeText(MainActivity.this, "!!!", Toast.LENGTH_LONG).show();
-
-
                     startActivityForResult(data, 2020);
                 }
             });
@@ -229,5 +220,17 @@ public class MainActivity extends AppCompatActivity {
                 }//
             }
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_search, menu);
+
+       final MenuItem searchItem = menu.findItem(R.id.action_search);
+
+         final SearchView searchView = (SearchView) searchItem.getActionView();
+        searchView.setOnQueryTextListener(this);
+
+        return true;
     }
 }

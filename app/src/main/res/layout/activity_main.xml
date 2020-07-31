@@ -6,7 +6,7 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <EditText
+ <!--   <EditText
         android:id="@+id/newItemEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,6 +17,8 @@
         android:hint="search contacts"
         android:background="@drawable/edittextstyle"
         />
+-->
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"

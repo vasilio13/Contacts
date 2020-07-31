@@ -61,61 +61,11 @@ int position;
                 data.putExtra(MainActivity.NEW_PHONE_MAIL_KEY,nPhoneMail);
                 data.putExtra(MainActivity.NEW_TYPE_CONTACT_KEY, nTypeContact);
                 data.putExtra(MainActivity.POSITION, position);
-                // if (typeContact == AddActivity.TypeContact.phone) {data.putExtra(MainActivity.NEW_TYPE_CONTACT_KEY,"phone");}
-                // else if (typeContact == AddActivity.TypeContact.mail) {data.putExtra(MainActivity.NEW_TYPE_CONTACT_KEY,"mail");}
-                //setResult(RESULT_OK, data);
-
 
                 setResult(2020,data);
                 finish();
 
             }
         });
-
-
-
     }
-
-
-
-      //Intent intent = getIntent();
-        //EditText nameet = findViewById(R.id.name_et);
-        //EditText phonemailet = findViewById(R.id.number_mail_et);
-        //Bundle arguments = getIntent().getExtras();
-      // Intent intent =getIntent();
-     // String name = arguments.get("name").toString();
-    // String phonemail = arguments.get("phonemail").toString();
-
-      //  String message = intent.getStringExtra(MainActivity.s);
-
-    //    intent.getExtras("name", ;
-    //    intent.getExtras("phonemail", phonemail);
-
-
-        //nameet.setText(name);
-      //  nameet.setText(name);
-        //phonemailet.setText(phonemail);
-       // phonemailet.setText(phonemail);
-      //  setResult(RESULT_OK, arguments);
-
-
-
-        /**MainActivity.Items item = new MainActivity.Items();
-        item.name=nName;
-        item.phoneMail=nPhoneMail;
-        item.typeContact=nTypeContact;
-
-        if (!nName.trim().isEmpty() && recyclerView.getAdapter() != null) {
-            MainActivity.NameListAdapter adapter1 = (MainActivity.NameListAdapter) recyclerView.getAdapter();
-            adapter1.addItem(item);
-        }
-        //  TextView testTextView=findViewById(R.id.testTextView); // тест
-        //testTextView.setText(nName);//test
-        // Toast.makeText(MainActivity.this, nName+" "+typeContact+" "+nPhoneMail, Toast.LENGTH_LONG).show(); // test
-    }
-*/
-
-
-
-
 }

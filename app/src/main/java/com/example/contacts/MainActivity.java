@@ -236,15 +236,5 @@ public class MainActivity extends AppCompatActivity {
 
         return true;
     }
-    @Override
-    public boolean onQueryTextChange(String query) {
-        // Here is where we are going to implement the filter logic
-        return false;
-    }
-
-    @Override
-    public boolean onQueryTextSubmit(String query) {
-        return false;
-    }
-
+   
 }

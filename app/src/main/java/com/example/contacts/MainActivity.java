@@ -25,7 +25,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
     static final String ACCESS_MESSAGE = "ACCESS_MESSAGE";
     static final String NEW_NAME_KEY = "NAME";
@@ -45,6 +45,16 @@ public class MainActivity extends AppCompatActivity {
     public static String nName;
     public static String nPhoneMail;
     public static String nTypeContact;
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        return false;
+    }
 
 
     class Items {
@@ -73,13 +83,13 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
 
-       // newItemEditText = findViewById(R.id.newItemEditText);
+      // newItemEditText.setText("");//"";findViewById(R.id.newItemEditText);
 
         FloatingActionButton addButton = findViewById(R.id.addButton);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String newName = newItemEditText.getText().toString();
+                String newName = "";//newItemEditText.getText().toString();
                 s = newName;
 
                 Intent intent = new Intent(MainActivity.this, AddActivity.class);
@@ -236,5 +246,5 @@ public class MainActivity extends AppCompatActivity {
 
         return true;
     }
-   
+
 }

@@ -25,6 +25,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
+import static java.util.Locale.filter;
+
 public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
     static final String ACCESS_MESSAGE = "ACCESS_MESSAGE";
@@ -46,14 +48,19 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     public static String nPhoneMail;
     public static String nTypeContact;
 
+    NameListAdapter sortAdapter = (NameListAdapter) recyclerView.getAdapter();
+
     @Override
     public boolean onQueryTextSubmit(String query) {
         return false;
     }
 
     @Override
-    public boolean onQueryTextChange(String newText) {
-        return false;
+    public boolean onQueryTextChange(String query) {
+        final ArrayList<Items> filteredModelList = filter(sortAdapter.items(), query);
+        sortAdapter.replaceAll(filteredModelList);
+        mBinding.recyclerView.scrollToPosition(0);
+        return true;
     }
 
 
@@ -243,6 +250,8 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
         final SearchView searchView = (SearchView) searchItem.getActionView();
         searchView.setOnQueryTextListener(this);
+
+
 
         return true;
     }

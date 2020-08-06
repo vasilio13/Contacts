@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
     ArrayList<Items> allItems = new ArrayList<>();
 
-    NameListAdapter sortAdapter = (NameListAdapter) recyclerView.getAdapter();
+  //  NameListAdapter sortAdapter = (NameListAdapter) recyclerView.getAdapter();
 
     @Override
     public boolean onQueryTextSubmit(String query) {
@@ -60,13 +60,14 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     @Override
     public boolean onQueryTextChange(String query) {
         final ArrayList<Items> filteredModelList = new ArrayList<>();
-        //sort for query
-        boolean eqTemplate;
         for (Items sch : allItems) {
 
         if (sch.name.startsWith(query))
             filteredModelList.add(sch);
         }
+
+        NameListAdapter sortAdapter = (NameListAdapter) recyclerView.getAdapter();
+        sortAdapter.setItems(filteredModelList);
         return true;
     }
 
@@ -152,8 +153,8 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
             if (!nName.trim().isEmpty() && recyclerView.getAdapter() != null) {
                 Toast.makeText(MainActivity.this, "!requestCode=" + requestCode, Toast.LENGTH_LONG).show();
-                int index = allItems.indexOf(item);
-                allItems.set(index,item);
+               // int index = allItems.indexOf(item);
+                allItems.set(position,item);
                 NameListAdapter changeAdapter = (NameListAdapter) recyclerView.getAdapter();
                 changeAdapter.setItems(allItems);
             }

@@ -48,6 +48,8 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     public static String nPhoneMail;
     public static String nTypeContact;
 
+    ArrayList<Items> allItems = new ArrayList<>();
+
     NameListAdapter sortAdapter = (NameListAdapter) recyclerView.getAdapter();
 
     @Override
@@ -57,9 +59,14 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
     @Override
     public boolean onQueryTextChange(String query) {
-        final ArrayList<Items> filteredModelList = filter(sortAdapter.items(), query);
-        sortAdapter.replaceAll(filteredModelList);
-        mBinding.recyclerView.scrollToPosition(0);
+        final ArrayList<Items> filteredModelList = new ArrayList<>();
+        //sort for query
+        boolean eqTemplate;
+        for (Items sch : allItems) {
+
+        if (sch.name.startsWith(query))
+            filteredModelList.add(sch);
+        }
         return true;
     }
 
@@ -125,9 +132,10 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             item.typeContact = nTypeContact;
 
             if (!nName.trim().isEmpty() && recyclerView.getAdapter() != null) {
+                allItems.add(item);
                 Toast.makeText(MainActivity.this, "requestCode=" + requestCode, Toast.LENGTH_LONG).show();
                 NameListAdapter adapter1 = (NameListAdapter) recyclerView.getAdapter();
-                adapter1.addItem(item);
+                adapter1.setItems(allItems);
             }
         } else if (requestCode == 2020) {
             String nName = data.getStringExtra(NEW_NAME_KEY);
@@ -144,9 +152,10 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
             if (!nName.trim().isEmpty() && recyclerView.getAdapter() != null) {
                 Toast.makeText(MainActivity.this, "!requestCode=" + requestCode, Toast.LENGTH_LONG).show();
-
+                int index = allItems.indexOf(item);
+                allItems.set(index,item);
                 NameListAdapter changeAdapter = (NameListAdapter) recyclerView.getAdapter();
-                changeAdapter.changeItem(item);
+                changeAdapter.setItems(allItems);
             }
 
         }
@@ -160,17 +169,21 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         NameListAdapter() {
         }
 
+        void setItems(ArrayList<Items> newItems){
+            items = newItems;
+            notifyDataSetChanged();
+        }
 
         void addItem(Items item) {
             items.add(item);
             notifyItemChanged(items.indexOf(item)); // for item
-            notifyDataSetChanged(); // for all items
+           // notifyDataSetChanged(); // for all items
         }
 
         void changeItem(Items item) {
             items.set(position,item);
           notifyItemChanged(position); // for item
-            notifyDataSetChanged(); // for all items
+          //  notifyDataSetChanged(); // for all items
         }
 
         @NonNull

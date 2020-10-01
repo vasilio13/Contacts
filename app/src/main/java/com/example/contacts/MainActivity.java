@@ -3,6 +3,7 @@ package com.example.contacts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.SearchView;
@@ -15,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
@@ -24,6 +26,7 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import static java.util.Locale.filter;
 
@@ -115,6 +118,8 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
 
         });
+
+
     }
 
     @Override
@@ -163,7 +168,9 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
     }
 
-    class NameListAdapter extends RecyclerView.Adapter<NameListAdapter.ItemViewHolder> {
+    class NameListAdapter extends RecyclerView.Adapter<NameListAdapter.ItemViewHolder> implements ItemTouchHelperAdapter {
+
+
 
         private ArrayList<Items> items = new ArrayList<>();
 
@@ -197,12 +204,48 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         @Override
         public void onBindViewHolder(@NonNull ItemViewHolder holder, final int position) {
             holder.bindData(items.get(position).name, items.get(position).phoneMail, items.get(position).typeContact);
+//holder.itemView.findViewById(R.id.edit_button);
+ Button editButton;
+            editButton = (Button) holder.itemView.findViewById(R.id.edit_button);
 
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
+            //Button editButton = findViewById(R.id.edit_button);
+            editButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Toast.makeText(MainActivity.this,"press button", Toast.LENGTH_LONG).show();
+
+                  //  ImageView iconPM = v.findViewById(R.id.icon_phone_mail);
+                   // iconPM.setImageResource(R.drawable.ic_search_black_24dp);
+                   // Intent data = new Intent(MainActivity.this, EditRemoveActivity.class);
+                   // nName = items.get(position).name;
+                   // nPhoneMail = items.get(position).phoneMail;
+                   // nTypeContact = items.get(position).typeContact;
+                   // data.putExtra(POSITION, position);
+                  //  data.putExtra(NEW_NAME_KEY, nName);
+                   // data.putExtra(NEW_PHONE_MAIL_KEY, nPhoneMail);
+                   // data.putExtra(NEW_TYPE_CONTACT_KEY, nTypeContact);
+                   // startActivityForResult(data, 2020);
+
+                }
+
+
+            });
+
+
+
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+
+
+
+                @Override
+                public void onClick(View v) {
+
+
+
+
+
                     ImageView iconPM = v.findViewById(R.id.icon_phone_mail);
-                    //   iconPM.setImageResource(R.drawable.ic_search_black_24dp); // Тестово меняю иконку для проверки нажатия
+                       iconPM.setImageResource(R.drawable.ic_search_black_24dp); // Тестово меняю иконку для проверки нажатия
 
                     Intent data = new Intent(MainActivity.this, EditRemoveActivity.class);
                     nName = items.get(position).name;
@@ -214,6 +257,10 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                     data.putExtra(NEW_TYPE_CONTACT_KEY, nTypeContact);
                     startActivityForResult(data, 2020);
                 }
+
+
+
+
             });
         }
 
@@ -252,9 +299,29 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             }
         }
 
+        @Override
+        public void onItemDismiss(int position) {
+            items.remove(position);
+            notifyItemRemoved(position);
+        }
 
+        @Override
+        public void onItemMove(int fromPosition, int toPosition) {
+            if (fromPosition < toPosition) {
+                for (int i = fromPosition; i < toPosition; i++) {
+                    Collections.swap(items, i, i + 1);
+                }
+            } else {
+                for (int i = fromPosition; i > toPosition; i--) {
+                    Collections.swap(items, i, i - 1);
+                }
+            }
+            notifyItemMoved(fromPosition, toPosition);
+            //return true;
+        }
 
     }
+    
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

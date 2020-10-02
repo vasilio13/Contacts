@@ -212,7 +212,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             editButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(MainActivity.this,"press button", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this,"press "+position, Toast.LENGTH_LONG).show();
 
                   //  ImageView iconPM = v.findViewById(R.id.icon_phone_mail);
                    // iconPM.setImageResource(R.drawable.ic_search_black_24dp);
@@ -240,7 +240,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                 @Override
                 public void onClick(View v) {
 
-
+/**
 
 
 
@@ -256,6 +256,8 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                     data.putExtra(NEW_PHONE_MAIL_KEY, nPhoneMail);
                     data.putExtra(NEW_TYPE_CONTACT_KEY, nTypeContact);
                     startActivityForResult(data, 2020);
+
+ **/
                 }
 
 

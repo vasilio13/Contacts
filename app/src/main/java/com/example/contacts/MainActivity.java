@@ -212,24 +212,49 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             editButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(MainActivity.this,"press "+position, Toast.LENGTH_LONG).show();
 
-                  //  ImageView iconPM = v.findViewById(R.id.icon_phone_mail);
-                   // iconPM.setImageResource(R.drawable.ic_search_black_24dp);
-                   // Intent data = new Intent(MainActivity.this, EditRemoveActivity.class);
-                   // nName = items.get(position).name;
-                   // nPhoneMail = items.get(position).phoneMail;
-                   // nTypeContact = items.get(position).typeContact;
-                   // data.putExtra(POSITION, position);
-                  //  data.putExtra(NEW_NAME_KEY, nName);
-                   // data.putExtra(NEW_PHONE_MAIL_KEY, nPhoneMail);
-                   // data.putExtra(NEW_TYPE_CONTACT_KEY, nTypeContact);
-                   // startActivityForResult(data, 2020);
+
+                    Intent data = new Intent(MainActivity.this, EditRemoveActivity.class);
+                    nName = items.get(position).name;
+                    nPhoneMail = items.get(position).phoneMail;
+                    nTypeContact = items.get(position).typeContact;
+                    data.putExtra(POSITION, position);
+                    data.putExtra(NEW_NAME_KEY, nName);
+                    data.putExtra(NEW_PHONE_MAIL_KEY, nPhoneMail);
+                    data.putExtra(NEW_TYPE_CONTACT_KEY, nTypeContact);
+                    startActivityForResult(data, 2020);
 
                 }
 
 
             });
+
+            final ImageView iconIV;
+            iconIV = (ImageView) holder.itemView.findViewById(R.id.icon_phone_mail);
+
+            //Button editButton = findViewById(R.id.edit_button);
+            iconIV.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(MainActivity.this,"icon press "+position, Toast.LENGTH_LONG).show();
+                    if (iconIV.getDrawable().equals(R.drawable.ic_help_black_24dp)) {
+                        iconIV.setImageResource(R.drawable.ic_contact_phone_blue_48dp);
+                    } //
+                    else if (iconIV.getDrawable().equals(R.drawable.ic_contact_phone_blue_48dp)) {
+                        iconIV.setImageResource(R.drawable.ic_help_black_24dp);
+                    }
+
+
+                }
+
+
+            });
+
+
+
+
+
+
 
 
 
@@ -239,7 +264,12 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
                 @Override
                 public void onClick(View v) {
+                    Toast.makeText(MainActivity.this,"press "+position, Toast.LENGTH_LONG).show();
+TextView englishWord = v.findViewById(R.id.nameText);
+if (englishWord.getVisibility()==v.VISIBLE)
 
+englishWord.setVisibility(v.GONE);
+else englishWord.setVisibility(v.VISIBLE);
 /**
 
 

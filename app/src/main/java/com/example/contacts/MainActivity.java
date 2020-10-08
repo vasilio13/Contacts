@@ -237,10 +237,10 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(MainActivity.this,"icon press "+position, Toast.LENGTH_LONG).show();
-                    if (iconIV.getDrawable().equals(R.drawable.ic_help_black_24dp)) {
-                        iconIV.setImageResource(R.drawable.ic_contact_phone_blue_48dp);
+                    if (iconIV.getDrawable().getConstantState().equals(getDrawable(R.drawable.ic_help_black_24dp).getConstantState())) {
+                        iconIV.setImageResource(R.drawable.ic_help_outline_black_24dp);
                     } //
-                    else if (iconIV.getDrawable().equals(R.drawable.ic_contact_phone_blue_48dp)) {
+                    else if (iconIV.getDrawable().getConstantState().equals(getDrawable(R.drawable.ic_help_outline_black_24dp).getConstantState())) {
                         iconIV.setImageResource(R.drawable.ic_help_black_24dp);
                     }
 
@@ -266,10 +266,13 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                 public void onClick(View v) {
                     Toast.makeText(MainActivity.this,"press "+position, Toast.LENGTH_LONG).show();
 TextView englishWord = v.findViewById(R.id.nameText);
+
 if (englishWord.getVisibility()==v.VISIBLE)
 
 englishWord.setVisibility(v.GONE);
 else englishWord.setVisibility(v.VISIBLE);
+
+                    iconIV.setImageResource(R.drawable.ic_help_black_24dp);
 /**
 
 

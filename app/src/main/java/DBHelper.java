@@ -1,7 +1,10 @@
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import java.util.ArrayList;
 
 public class DBHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "note.db";
@@ -49,6 +52,38 @@ public class DBHelper extends SQLiteOpenHelper {
 
         return status;
     }
+
+    public ArrayList<Note> getDataFromDatabase() {
+ SQLiteDatabase db = this.getReadableDatabase();
+ Cursor cursor = db.query(TABLE_NAME,null,null,null,null,null,null);
+
+ ArrayList<Note> list = new ArrayList<>();
+ if (cursor != null && cursor.getCount() > 0) {
+ while (cursor.moveToNext()) {
+ Note note = new Note();
+ note.setId(Integer.toString(cursor.getInt(cursor.getColumnIndex(ID))));
+ note.setContent(cursor.getString(cursor.getColumnIndex(COL_NOTE)));
+ list.add(note);
+ }
+ cursor.close();
+ }
+ db.close();
+ return list;
+}
+
+ public String getLastInsertedId() {
+ SQLiteDatabase db = this.getReadableDatabase();
+ Cursor cursor = db.rawQuery("SELECT " + ID
+                 + " FROM " + TABLE_NAME
+ + " ORDER BY " + ID + " DESC LIMIT 1",null);
+ if (cursor != null && cursor.getCount() > 0) {
+ cursor.moveToNext();
+ return Integer.toString(cursor.getInt(cursor.getColumnIndex(ID)));
+ } else {
+ return null;
+ }
+
+}
 
 
 

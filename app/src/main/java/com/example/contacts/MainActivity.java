@@ -28,6 +28,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.Collections;
 
+
 import static java.util.Locale.filter;
 
 public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
@@ -52,6 +53,8 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     public static String nTypeContact;
 
     ArrayList<Items> allItems = new ArrayList<>();
+
+    DBHelper dbHelper;
 
   //  NameListAdapter sortAdapter = (NameListAdapter) recyclerView.getAdapter();
 
@@ -98,10 +101,13 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         setContentView(R.layout.activity_main);
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setAdapter(new NameListAdapter());
-
+NameListAdapter adapter = new NameListAdapter(dbHelper.getDataFromDatabase().this);
+recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
 
-      // newItemEditText.setText("");//"";findViewById(R.id.newItemEditText);
+        dbHelper = new DBHelper(this);
+
+
 
         FloatingActionButton addButton = findViewById(R.id.addButton);
         addButton.setOnClickListener(new View.OnClickListener() {

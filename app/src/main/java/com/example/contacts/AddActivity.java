@@ -11,9 +11,16 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
+
 
 public class AddActivity extends AppCompatActivity {
+
+    enum TypeContact {phone,mail}
+    public TypeContact typeContact;
+
+    static String newName;
+    static String newPhoneMail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +52,11 @@ public class AddActivity extends AppCompatActivity {
                         break;
                     case R.id.radioButtonPhone:
                         numberMailET.setHint("+375 29 xx - xx - xx");
+                        typeContact= TypeContact.phone;
                         break;
                     case R.id.radioButtonMail:
                         numberMailET.setHint("name@hosting.zone");
+                        typeContact= TypeContact.mail;
                         break;
                 }
             }
@@ -62,28 +71,27 @@ public class AddActivity extends AppCompatActivity {
 
        @Override
         public boolean onOptionsItemSelected(MenuItem item) {
-            // Handle action bar item clicks here. The action bar will
-            // automatically handle clicks on the Home/Up button, so long
-            // as you specify a parent activity in AndroidManifest.xml.
-           /**
-            * switch (item.getItemId()) {
-            * 		case R.id.menuPurchasesListNewRecord:
-            * 			// TODO: обработчик нажатия здесь
-            * 			return true;
-            *                }
-            *
-            * 		return super.onOptionsItemSelected(item);
-
-            *
-            */
-
-
 
             int id = item.getItemId();
 
-            //noinspection SimplifiableIfStatement
+           final EditText numberMailET = findViewById(R.id.number_mail_et);
+
+           final EditText nameET = findViewById(R.id.name_et);
             if (id == R.id.toolbar_button_done) {
-                Toast.makeText(AddActivity.this, "Action clicked", Toast.LENGTH_LONG).show();
+               // Toast.makeText(AddActivity.this, nameET.getText()+" "+numberMailET.getText()+" Галочка работает !!!", Toast.LENGTH_LONG).show();
+                String newName = nameET.getText().toString();
+                String newPhoneMail = numberMailET.getText().toString();
+
+                onPause();
+
+                Intent data = new Intent();
+                data.putExtra(MainActivity.NEW_NAME_KEY,newName);
+                data.putExtra(MainActivity.NEW_PHONE_MAIL_KEY,newPhoneMail);
+                if (typeContact == TypeContact.phone) {data.putExtra(MainActivity.NEW_TYPE_CONTACT_KEY,"phone");}
+                else if (typeContact == TypeContact.mail) {data.putExtra(MainActivity.NEW_TYPE_CONTACT_KEY,"mail");}
+                setResult(1, data);
+                finish();
+
                 return true;
             }
 

@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Contacts</string>
     <string name="activity_add_label">Add contact</string>
+    <string name="action_search">Search contacts</string>
+    <string name="button_edit">Edit</string>
+
 </resources>
